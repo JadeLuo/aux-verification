@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>审核</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/registry.css}">
+    <link rel="stylesheet" th:href="@{/css/front.css}">
+</head>
+
+<body class="front-body">
+
+
+<nav class="navbar navbar-default navbar-fixed-top front-nav">
+    <div class="container">
+        <div class="nav-collapse collapse" id="nav-collapse">
+            <ul class="nav navbar-nav">
+                <li class="front-active"><a href="/ver/entity">实体审核</a></li>
+
+                <li class=""><a href="/ver/relation">关系审核</a></li>
+
+                <li class=""><a href="https://docs.qq.com/doc/DY0ptTUNlQ3p0Rk5n?opendocxfrom=admin">帮助文档</a> </li>
+
+                <!--<li class="front-active"><a href="group/groups">群组</a></li>-->
+                <!--<li class="dropdown ">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">我的<span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu nav-dropdown front-min-width">-->
+                <!--<li><a href="collections"><span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;我的收藏</a>-->
+                <!--</li>-->
+                <!--<li><a href="myshare"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;我的分享</a>-->
+                <!--</li>-->
+                <!--<li><a href="mydraft"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;我的草稿</a></li>-->
+                <!--<li><a href="searchcomments"><span class="glyphicon glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;我的消息</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="dropdown ">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">新建<span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu nav-dropdown front-min-width">-->
+                <!--<li><a href="resource/upload/topic" target="_blank"><span-->
+                <!--class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;新建话题</a></li>-->
+                <!--<li><a href="resource/upload/list" target="_blank"><span-->
+                <!--class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;新建列表</a></li>-->
+                <!--<li><a href="resource/upload/article" target="_blank"><span-->
+                <!--class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;新建资源</a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="dropdown ">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="msgControllerId">消息 <span-->
+                <!--class="badge front-msg-badge"><span id="newMsgNum">0</span></span><span-->
+                <!--class="caret badge-caret"></span></a>-->
+                <!--<ul class="dropdown-menu nav-dropdown front-mid-width" id="showMsgBoxId"></ul>-->
+                <!--</li>-->
+                <!--<li class=""><a href="javascript:void(0)" id="friendlistbtn">联系人</a></li>-->
+                <!--<li class="dropdown">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助<span class="caret"></span></a>-->
+                <!--<ul class="dropdown-menu nav-dropdown front-min-width">-->
+                <!--<li><a href="http://freeshare.free4inno.com/resource?id=15403&tipstatus=success"-->
+                <!--target="_blank"><span-->
+                <!--class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;使用帮助</a></li>-->
+                <!--<li><a href="https://www.wenjuan.com/s/AbUr6b/" target="_blank"><span-->
+                <!--class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;用户反馈</a></li>-->
+
+                <!--</ul>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div class="nav-right">
+            <!--<div class="area area-media"><span class="glyphicon glyphicon-search nav-search-icon" id="searchbox"></span>-->
+            <!--</div>-->
+            <!--<div class="area area-media"><span class=" glyphicon glyphicon-th" data-gen="nav-pro"-->
+            <!--data-toggle="front-popover-bottom" data-target="#nav-pro"></span></div>-->
+            <!---->
+            <div class="area area-avatar area-media">
+                <img th:src="@{/img/user.png}" class="img-circle nav-avatar" alt="avatar"
+                     id="front-nav-toggle-avatar" data-toggle="front-popover-bottom" data-target="#nav-user"/>
+            </div>
+
+
+            <!--<div class="area visible-xs visible-sm nav-toggle-down" data-toggle="collapse" data-target="#nav-collapse">-->
+            <!--<span class="glyphicon glyphicon-menu-hamburger" id="front-nav-toggle-down"></span></div>-->
+            <!--<div id="nav-pro" data-pro="5"></div> &lt;!&ndash; 产品导航 &ndash;&gt;-->
+            <div id="nav-user" class="bottom nav-popover nav-popover-media nav-avatar-menu"> <!-- 用户菜单 -->
+                <div class="arrow"></div>
+                <ul>
+                    <li class="text-center">
+                        <a href="#" data-toggle="front-modal" data-size="modal-sm"
+                           data-href="account/getotheruserinfo?friendId=10701">
+                            <img th:src="@{/img/user.png}" alt="avatar" class="img-circle img-lg-avatar"/>
+                        </a>
+                        <!--<div><span>liwangadd</span>&nbsp;<span class="badge front-level-badge" id="personLever"></span>-->
+                        <!--</div>-->
+                        <div>
+                            <small th:text="${email}">liwangadd@gmail.com</small>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <!--<li class="clearfix">-->
+                    <!--<div class="col-xs-4 text-center">-->
+                    <!--<div id="personScore">4</div>-->
+                    <!--<div class="text-primary">积分</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-4 text-center">-->
+                    <!--<div id="personResourse">4</div>-->
+                    <!--<div class="text-primary">资源</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-4 text-center">-->
+                    <!--<div id="personGroup">4</div>-->
+                    <!--<div class="text-primary">群组</div>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--<li class="divider"></li>-->
+                    <!--<li><a href="http://account.free4inno.com/users" target="_blank">-->
+                        <!--<span></span>&nbsp;&nbsp;账号设置</a>-->
+                    <!--</li>-->
+
+                    <!--<li><a href="javascript:void(0)" id="inverse"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;切换到企业版</a>-->
+                    <!--</li>-->
+
+
+                    <!--<li><a href="http://freeshareadmin.free4inno.com/" target="_blank"><span-->
+                    <!--class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;管理员门户</a></li>-->
+
+                    <li><a href="javascript:void(0)" onclick="logout()">
+                        <span></span>&nbsp;&nbsp;退出</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="front-inner">
+    <div class="container">
+        <form>
+            <div class="form-group" style="margin-top: 20px">
+                <label>审核文本</label>
+                <textarea id="content" class="form-control" rows="8"></textarea>
+            </div>
+            <div class="form-group">
+                <strong id="statics-text">总文本数：100条，已审核：10条，审核通过：5条，审核失败：5条</strong>
+            </div>
+            <div class="pull-right col-md-2">
+                <button id="accept" type="button" class="btn btn-primary col-md-5">通过</button>
+                <button id="denied" type="button" class="btn btn-danger col-md-5 pull-right">拒绝</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="http://newfront.free4inno.com/js/plugin/front.js"></script>
+
+<script>
+    function logout() {
+        $.ajax({
+            url: "/user/logout",
+            type: "post",
+            dataType: "json",
+            success: (result) => {
+                if (result['code'] === 'SUCCESS') {
+                    window.location.href = "/user/login";
+                }
+            }
+        });
+    }
+
+    let contentInput = $('#content');
+    let staticsText = $('#statics-text');
+    let record;
+
+    getNext();
+
+    function getNext() {
+        $.ajax({
+            url: "/ver/entity/next",
+            type: "get",
+            dataType: "json",
+            contentType: 'application/json',
+            success: (result) => {
+                if (result['code'] === 'SUCCESS') {
+                    record = result['content'];
+                    contentInput.val(record['content']);
+                    staticsText.html(`总文本数：${record['totalCount']}条，已审核：${record['passedCount'] + record['deniedCount']}条，
+                        审核通过：${record['passedCount']}条，审核失败：${record['deniedCount']}条`)
+                } else {
+                    alert(result['reason']);
+                }
+            }
+        })
+    }
+
+    $('#accept').click((e) => {
+        e.preventDefault();
+        record['content'] = contentInput.val();
+        $.ajax({
+            url: "/ver/entity/accept",
+            type: "post",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(record),
+            success: (result) => {
+                if (result['code'] === 'SUCCESS') {
+                    getNext();
+                } else {
+                    alert("审核失败，请重试!");
+                }
+            }
+        })
+    });
+
+    $('#denied').click((e) => {
+        e.preventDefault();
+        record['content'] = contentInput.val();
+        $.ajax({
+            url: "/ver/entity/denied",
+            type: "post",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(record),
+            success: (result) => {
+                if (result['code'] === 'SUCCESS') {
+                    getNext();
+                } else {
+                    alert("审核失败，请重试!");
+                }
+            }
+        })
+    });
+
+</script>
+
+</body>
+</html>

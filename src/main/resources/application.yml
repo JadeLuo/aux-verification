@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.106.90.67:3306/aux_verification?charset=utf8mb4&useSSL=false&serverTimezone=Asia/Shanghai
+    username: aux
+    password: Bupt2019~
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+    cache: false
+
+init-for-test: false
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

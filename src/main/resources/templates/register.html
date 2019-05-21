@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/registry.css}">
+    <link rel="stylesheet" th:href="@{/css/front.css}">
+</head>
+<body>
+<div class="front-inner">
+    <!--<div class="jumbotron hero-login">-->
+    <!--<div class="container text-center">-->
+    <!--<h4 style="font-size: 32px; font-weight: bold">用户注册</h4>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="container">
+        <div class="row" id="signupForm">
+            <div class="col-md-offset-4 col-md-4">
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control input-lg" id="txemail" placeholder="邮箱"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="pwd" class="form-control input-lg" id="txpass"
+                           placeholder="密码"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="re-pwd" class="form-control input-lg" id="tx_repass"
+                           placeholder="确认密码"/>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="return regCheck();" class="btn btn-info btn-block btn-lg">注册
+                    </button>
+                </div>
+                <span class="redletter" id="error"></span>
+                <div class="form-group">
+                    <a th:href="@{/user/login}" style="text-decoration: none">
+                        <input type="button" class="btn btn-default btn-block btn-lg"
+                               style="border: 1px solid #5bc0de;color: #5bc0de"
+                               value="已有账号？马上登录">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="front-push"></div>
+</div>
+
+<script src="/js/jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+    // console.log("javascript");
+    //
+    function regCheck() {
+        let warnSpan = $("#error");
+        let emailInput = $("#txemail");
+        let passInput = $("#txpass");
+        let repassInput = $("#tx_repass");
+        if (emailInput.val() === "") {
+            warnSpan.html("请输入邮箱名称!");
+        } else if (!isEmail(emailInput.val())) {
+            warnSpan.html("输入的邮箱有误!");
+        } else if (passInput.val() === "") {
+            warnSpan.html("请输入密码!");
+        } else if (repassInput.val() === "") {
+            warnSpan.html("请输入确认密码!");
+        } else if (passInput.val() !== repassInput.val()) {
+            warnSpan.html("两次输入的密码不同!");
+        } else {
+            let params = {};
+            params['email'] = emailInput.val();
+            params['pwd'] = passInput.val();
+            $.ajax({
+                url: '/user/register',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(params),
+                success: (result) => {
+                    console.log(result);
+                    if (result['code'] !== "FAILURE") {
+                        warnSpan.hide();
+                        window.location.href = "/user/login";
+                    } else {
+                        warnSpan.html(result['reason']);
+                        warnSpan.show();
+                    }
+                }
+            });
+        }
+    }
+
+    function isEmail(b) {
+        var a = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+        return a.test(b)
+    }
+</script>
+
+</body>
+</html>
