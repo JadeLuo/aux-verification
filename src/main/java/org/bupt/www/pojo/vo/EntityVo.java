@@ -13,6 +13,8 @@ public class EntityVo extends EntityMark {
 
     private long deniedCount;
 
+    private long reviewingCount;
+
     public EntityVo(EntityMark mark){
         BeanUtils.copyProperties(mark, this);
     }

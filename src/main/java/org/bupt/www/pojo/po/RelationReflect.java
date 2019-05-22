@@ -17,6 +17,6 @@ public class RelationReflect {
     private String relaName;
 
     @Column(name = "rela_no", nullable = false)
-    private String relaNo;
+    private Long relaNo;
 
 }

@@ -21,6 +21,10 @@ public interface EntityMarkRepository extends JpaRepository<EntityMark, Long> {
 
     long countByPassed(boolean passed);
 
+    @Query(value = "SELECT count(1) FROM entity_mark WHERE passed = b'0' AND reviewed = b'1' AND ver_date IS NOT NULL ",
+            nativeQuery = true)
+    long countDenied();
+
     @Modifying
     @Query("update EntityMark set verDate = :verDate, userId = :userId, reviewed = :reviewed where passed = :passed")
     void initForTest(@Param("verDate") Date verData, @Param("userId") Long userId, @Param("reviewed") Boolean reviewed,

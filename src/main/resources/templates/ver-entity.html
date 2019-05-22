@@ -183,7 +183,8 @@
                 if (result['code'] === 'SUCCESS') {
                     record = result['content'];
                     contentInput.val(record['content']);
-                    staticsText.html(`总文本数：${record['totalCount']}条，已审核：${record['passedCount'] + record['deniedCount']}条，
+                    staticsText.html(`总文本数：${record['totalCount']}条，审核中：${record['reviewingCount']}条，
+                        已审核：${record['passedCount'] + record['deniedCount']}条，
                         审核通过：${record['passedCount']}条，审核失败：${record['deniedCount']}条`)
                 } else {
                     alert(result['reason']);

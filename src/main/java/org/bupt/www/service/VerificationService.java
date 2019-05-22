@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -58,9 +57,13 @@ public class VerificationService {
 
     @Transactional
     public void fillEntityCount(EntityVo vo) {
+        long viewedCount = entityMarkRepository.countByReviewed(true);
         vo.setTotalCount(entityMarkRepository.count());
         vo.setPassedCount(entityMarkRepository.countByPassed(true));
-        vo.setDeniedCount(entityMarkRepository.countByReviewed(true) - vo.getPassedCount());
+//        vo.setDeniedCount(entityMarkRepository.countByPassed(false));
+        vo.setDeniedCount(entityMarkRepository.countDenied());
+        vo.setReviewingCount(viewedCount - vo.getDeniedCount() - vo.getPassedCount());
+//        vo.setDeniedCount(entityMarkRepository.countByReviewed(true) - vo.getPassedCount());
     }
 
     @Transactional
@@ -91,15 +94,16 @@ public class VerificationService {
         List<RelationReflect> reflects = relationReflectRepository.findAll();
         vo.setReflects(reflects);
 
-        Optional<RelationReflect> reflect = relationReflectRepository.findByRelaNo(String.valueOf(vo.getRelationId()));
+        Optional<RelationReflect> reflect = relationReflectRepository.findByRelaNo(vo.getRelationId());
         if (reflect.isPresent()) {
             vo.setRelationName(reflect.get().getRelaName());
             vo.setRelationNo(reflect.get().getRelaNo());
         }
-
+        long viewedCount = relationMarkRepository.countByReviewed(true);
         vo.setTotalCount(relationMarkRepository.count());
         vo.setPassedCount(relationMarkRepository.countByPassed(true));
-        vo.setDeniedCount(relationMarkRepository.countByReviewed(true) - vo.getPassedCount());
+        vo.setDeniedCount(relationMarkRepository.countDenied());
+        vo.setReviewingCount(viewedCount - vo.getPassedCount() - vo.getDeniedCount());
     }
 
     @Transactional

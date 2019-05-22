@@ -20,6 +20,10 @@ public interface RelationMarkRepository extends JpaRepository<RelationMark, Long
 
     long countByPassed(boolean passed);
 
+    @Query(value = "SELECT count(1) FROM relation_mark WHERE passed = b'0' AND reviewed = b'1' AND ver_date IS NOT NULL ",
+            nativeQuery = true)
+    long countDenied();
+
     @Modifying
     @Query("update RelationMark set reviewed = :reviewed, verDate = :verDate, userId = :userId where passed = :passed")
     void initForTest(@Param("verDate") Date verData, @Param("userId") Long userId, @Param("reviewed") Boolean reviewed,

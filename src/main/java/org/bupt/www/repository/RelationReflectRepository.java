@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RelationReflectRepository extends JpaRepository<RelationReflect, Long> {
-    Optional<RelationReflect> findByRelaNo(String relaNo);
+    Optional<RelationReflect> findByRelaNo(Long relaNo);
 }

@@ -15,13 +15,15 @@ public class RelationVo extends RelationMark {
 
     private String relationName;
 
-    private String relationNo;
+    private Long relationNo;
 
     private long totalCount;
 
     private long passedCount;
 
     private long deniedCount;
+
+    private long reviewingCount;
 
     public RelationVo(RelationMark mark){
         BeanUtils.copyProperties(mark, this);
